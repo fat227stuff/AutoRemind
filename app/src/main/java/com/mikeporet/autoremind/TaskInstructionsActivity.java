@@ -1,10 +1,18 @@
 package com.mikeporet.autoremind;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -18,6 +26,7 @@ import org.w3c.dom.Text;
 import android.net.Uri;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class TaskInstructionsActivity extends AppCompatActivity {
@@ -30,6 +39,15 @@ public class TaskInstructionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_task_instructions);
         final Task current_task =(Task) getIntent().getSerializableExtra("Task");
         setTitle(current_task.getTitle());
+
+        android.support.v4.app.NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this).setSmallIcon(R.drawable.ar_notification).setContentTitle("My notification").setContentText("Hello World");
+        Intent resultIntent = new Intent(this, CarHomeScrollingActivity.class);
+
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        mBuilder.setContentIntent(resultPendingIntent);
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         taskBodyText = (TextView) findViewById(R.id.task_instructions_body);
         //ImageView instruction_image = (ImageView) findViewById(R.id.instructionpic);
@@ -56,7 +74,6 @@ public class TaskInstructionsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +83,7 @@ public class TaskInstructionsActivity extends AppCompatActivity {
 //                Car_Home home = (Car_Home) get;
 //                List<Task> tasklist = home.getTaskList();
 //                tasklist.remove(current_task);
+
                 finish();
             }
         });
