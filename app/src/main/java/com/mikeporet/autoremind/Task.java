@@ -17,9 +17,10 @@ class Task implements Serializable {
     private ArrayList<String> steps;
     private ArrayList<Supply> supplies;
     private String video_url;
+    private String date;
 
 
-    public Task(String title, int image, int interval, char difficulty, short num_people, ArrayList<String> steps, ArrayList<Supply> supplies, String video_url) {
+    public Task(String title, int image, int interval, int difficulty, int num_people, ArrayList<String> steps, ArrayList<Supply> supplies, String video_url, String date) {
         this.title = title;
         this.image = image;
         this.interval = interval;
@@ -28,6 +29,7 @@ class Task implements Serializable {
         this.steps = steps;
         this.supplies = supplies;
         this.video_url = video_url;
+        this.date = date;
     }
 
     public ArrayList<Supply> getSupplies() {
@@ -61,6 +63,10 @@ class Task implements Serializable {
     public int getInterval() {
 
         return interval;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public int getDifficulty() {

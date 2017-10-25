@@ -3,6 +3,7 @@ package com.mikeporet.autoremind;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,7 +28,10 @@ public class CarTasksRecyclerAdapter extends RecyclerView.Adapter<CarTasksRecycl
 
 
         public TextView taskTitle;
+        public TextView taskDueDate;
         public ImageView taskImage;
+        public ImageView taskDifficulty;
+        private ImageView numPeople;
         public TextView taskInstructions;
         public TextView taskDone;
 
@@ -35,9 +39,12 @@ public class CarTasksRecyclerAdapter extends RecyclerView.Adapter<CarTasksRecycl
         public ViewHolder(final View itemView) {
             super(itemView);
             taskTitle = (TextView) itemView.findViewById(R.id.task_title);
+            taskDueDate = (TextView) itemView.findViewById(R.id.taskDueDate);
             taskImage = (ImageView) itemView.findViewById(R.id.image_view);
             taskInstructions = (TextView) itemView.findViewById(R.id.task_instructions);
             taskDone = (TextView) itemView.findViewById(R.id.task_done);
+            taskDifficulty = (ImageView) itemView.findViewById(R.id.difficultyMeter);
+            numPeople = (ImageView) itemView.findViewById(R.id.numPeopleMeter);
             taskInstructions.setOnClickListener(this);
           }
 
@@ -47,10 +54,10 @@ public class CarTasksRecyclerAdapter extends RecyclerView.Adapter<CarTasksRecycl
 
             List<Task> taskList = new ArrayList<>();
             //String title, int image, int interval, char difficulty, char num_people, ArrayList<String> steps, ArrayList<Supply> supplies, String video_url
-            taskList.add(new Task("Oil Change", R.drawable.oilchange, 0, '0', (short)0, null, null, ""));
-            taskList.add(new Task("Air Filter", R.drawable.airfilter, 0, '0', (short)0, null, null, ""));
-            taskList.add(new Task("Battery Replacement", R.drawable.batteryreplacement, 0, '0', (short)0, null, null, ""));
-            taskList.add(new Task("Coolant Flush", R.drawable.coolantflush, 0, '0', (short)0, null, null, ""));
+            taskList.add(new Task("Oil Change", R.drawable.oilchange, 0, 1, 1, null, null, "", ""));
+            taskList.add(new Task("Air Filter", R.drawable.airfilter, 0, 2, 3, null, null, "", ""));
+            taskList.add(new Task("Battery Replacement", R.drawable.batteryreplacement, 0, 3, 2, null, null, "", ""));
+            taskList.add(new Task("Test Coolant Flush", R.drawable.coolantflush, 0, 1, 3, null, null, "", ""));
 
             Task current_task = taskList.get(this.getAdapterPosition());
             String cTaskTitle = current_task.getTitle();
@@ -96,6 +103,44 @@ public class CarTasksRecyclerAdapter extends RecyclerView.Adapter<CarTasksRecycl
         //Log.d("imagedrawable", image.getDrawable().toString());
 //        image.setImageDrawable(image.getContext().getDrawable(task.getImage()));
         //image.setBackgroundResource(task.getImage());
+
+        ImageView difficultyMeter = holder.taskDifficulty;
+        Log.d("difficultyMeter", new Integer(task.getDifficulty()).toString());
+        Log.d("numPeople", new Integer(task.getNum_people()).toString());
+        Log.d("difficultyTitle", task.getTitle());
+        switch (task.getDifficulty()) {
+            case 1:
+                difficultyMeter.setImageDrawable(image.getContext().getDrawable(R.drawable.easy));
+                break;
+            case 2:
+                difficultyMeter.setImageDrawable(image.getContext().getDrawable(R.drawable.meduim));
+                break;
+            case 3:
+                difficultyMeter.setImageDrawable(image.getContext().getDrawable(R.drawable.hard));
+                break;
+            default:
+                difficultyMeter.setImageDrawable(image.getContext().getDrawable(R.drawable.hard));
+                break;
+        }
+
+        TextView date = holder.taskDueDate;
+        date.setText(task.getDate());
+
+        ImageView numPeople = holder.numPeople;
+        switch (task.getNum_people()) {
+            case 1:
+                numPeople.setImageDrawable(image.getContext().getDrawable(R.drawable.one_people));
+                break;
+            case 2:
+                numPeople.setImageDrawable(image.getContext().getDrawable(R.drawable.two_people));
+                break;
+            case 3:
+                numPeople.setImageDrawable(image.getContext().getDrawable(R.drawable.three_people));
+                break;
+            default:
+                numPeople.setImageDrawable(image.getContext().getDrawable(R.drawable.one_people));
+                break;
+        }
     }
 
     @Override

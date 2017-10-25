@@ -60,10 +60,10 @@ public class CarHomeScrollingActivity extends AppCompatActivity {
 
     private List<Task> getTasks(Car car) {
         List<Task> taskList = new ArrayList<>();
-        taskList.add(new Task("Oil Change", R.drawable.oilchange, 0, '0', (short)0, null, null, ""));
-        taskList.add(new Task("Air Filter", R.drawable.airfilter, 0, '0', (short)0, null, null, ""));
-        taskList.add(new Task("Battery Replacement", R.drawable.batteryreplacement, 0, '0', (short)0, null, null, ""));
-        taskList.add(new Task("Coolant Flush", R.drawable.coolantflush, 0, '0', (short)0, null, null, ""));
+        taskList.add(new Task("Oil Change", R.drawable.oilchange, 0, 1, 1, null, null, "", "Oct 31, 2017"));
+        taskList.add(new Task("Air Filter", R.drawable.airfilter, 0, 2, 3, null, null, "", "Nov 1, 2017"));
+        taskList.add(new Task("Battery Replacement", R.drawable.batteryreplacement, 0, 3, 2, null, null, "", "Nov 31, 2017"));
+        taskList.add(new Task("Coolant Flush", R.drawable.coolantflush, 0, 1, 2, null, null, "", "Dec 1, 2017"));
         return taskList;
     }
 }

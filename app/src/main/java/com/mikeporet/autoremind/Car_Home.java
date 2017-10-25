@@ -31,10 +31,10 @@ public class Car_Home extends AppCompatActivity {
 
         //Set Dummy Data
         taskList = new ArrayList<>();
-        taskList.add(new Task("Oil Change", R.drawable.oilchange, 0, '0', (short)0, null, null, ""));
-        taskList.add(new Task("Air Filter", R.drawable.airfilter, 0, '0', (short)0, null, null, ""));
-        taskList.add(new Task("Battery Replacement", R.drawable.batteryreplacement, 0, '0', (short)0, null, null, ""));
-        taskList.add(new Task("Coolant Flush", R.drawable.coolantflush, 0, '0', (short)0, null, null, ""));
+        taskList.add(new Task("Oil Change", R.drawable.oilchange, 0, '0', (short)0, null, null, "", ""));
+        taskList.add(new Task("Air Filter", R.drawable.airfilter, 0, '0', (short)0, null, null, "", ""));
+        taskList.add(new Task("Battery Replacement", R.drawable.batteryreplacement, 0, '0', (short)0, null, null, "", ""));
+        taskList.add(new Task("Coolant Flush", R.drawable.coolantflush, 0, '0', (short)0, null, null, "", ""));
         recyclerView = (RecyclerView) findViewById(R.id.rv);
 
         CarTasksRecyclerAdapter adapter = new CarTasksRecyclerAdapter(taskList);
