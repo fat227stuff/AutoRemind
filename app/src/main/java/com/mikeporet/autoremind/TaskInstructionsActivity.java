@@ -80,10 +80,6 @@ public class TaskInstructionsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Done!", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-//                Car_Home home = (Car_Home) get;
-//                List<Task> tasklist = home.getTaskList();
-//                tasklist.remove(current_task);
-
                 finish();
             }
         });

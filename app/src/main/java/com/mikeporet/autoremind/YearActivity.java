@@ -3,10 +3,14 @@ package com.mikeporet.autoremind;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -36,6 +40,39 @@ public class YearActivity extends AppCompatActivity {
         String model = getIntent().getStringExtra("Model");
         int carImage = getCarImage(make, model, year);
         Car car = new Car(make, model, Integer.parseInt(year.getSelectedItem().toString()), carImage);
+
+        //Save car to internal storage
+        FileOutputStream fStream = null;
+        ObjectOutputStream oStream = null;
+
+        String fileName = "car.srl";
+        File directory = new File(getFilesDir() + File.pathSeparator + fileName);
+
+        try {
+            fStream = new FileOutputStream(directory);
+            oStream = new ObjectOutputStream(fStream);
+            oStream.writeObject(car);
+            Log.d("WriteSuccess", "WriteSuccess");
+        } catch (Exception e) {
+            Log.d("FileStreamError", e.toString());
+        } finally {
+            if(fStream != null) {
+                try {
+                    fStream.close();
+                } catch (Exception e) {
+                    Log.d("FileStream Close Error", e.toString());
+                }
+            }
+            if(oStream != null) {
+                try {
+                    oStream.close();
+                } catch (Exception e) {
+                    Log.d("ObjStream Close Error", e.toString());
+                }
+            }
+        }
+
+
         Intent intent = new Intent(this, CarHomeScrollingActivity.class);
         intent.putExtra("Car", car);
         startActivity(intent);

@@ -3,11 +3,13 @@ package com.mikeporet.autoremind;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
+
 /**
  * Created by mikeporet on 10/16/17.
  */
 
-public class Car implements Parcelable{
+public class Car implements Serializable {
 
     private String make;
     private String model;
@@ -58,35 +60,35 @@ public class Car implements Parcelable{
         return (year == 0 ? "": year + " ") + make + " " + model;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int flags) {
-        parcel.writeString(make);
-        parcel.writeString(model);
-        parcel.writeInt(year);
-        parcel.writeInt(image);
-    }
-
-    // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
-    public static final Parcelable.Creator<Car> CREATOR = new Parcelable.Creator<Car>() {
-        public Car createFromParcel(Parcel in) {
-            return new Car(in);
-        }
-
-        public Car[] newArray(int size) {
-            return new Car[size];
-        }
-    };
-
-    // example constructor that takes a Parcel and gives you an object populated with it's values
-    private Car(Parcel in) {
-        make = in.readString();
-        model = in.readString();
-        year = in.readInt();
-        image = in.readInt();
-    }
+//    @Override
+//    public int describeContents() {
+//        return 0;
+//    }
+//
+//    @Override
+//    public void writeToParcel(Parcel parcel, int flags) {
+//        parcel.writeString(make);
+//        parcel.writeString(model);
+//        parcel.writeInt(year);
+//        parcel.writeInt(image);
+//    }
+//
+//    // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
+//    public static final Parcelable.Creator<Car> CREATOR = new Parcelable.Creator<Car>() {
+//        public Car createFromParcel(Parcel in) {
+//            return new Car(in);
+//        }
+//
+//        public Car[] newArray(int size) {
+//            return new Car[size];
+//        }
+//    };
+//
+//    // example constructor that takes a Parcel and gives you an object populated with it's values
+//    private Car(Parcel in) {
+//        make = in.readString();
+//        model = in.readString();
+//        year = in.readInt();
+//        image = in.readInt();
+//    }
 }

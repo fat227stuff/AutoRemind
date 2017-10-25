@@ -16,7 +16,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Car_Home" />
         <activity
             android:name=".TaskInstructionsActivity"
             android:label="@string/title_activity_task_instructions"

@@ -1,5 +1,6 @@
 package com.mikeporet.autoremind;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -26,7 +27,7 @@ public class CarHomeScrollingActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_car);
         setSupportActionBar(toolbar);
 
-        Car car = getIntent().getParcelableExtra("Car");
+        Car car = (Car) getIntent().getSerializableExtra("Car");
 
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.app_bar_car);
         appBarLayout.setBackground(getDrawable(car.getImage()));
@@ -48,6 +49,14 @@ public class CarHomeScrollingActivity extends AppCompatActivity {
 //                        .setAction("Action", null).show();
 //            }
 //        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     public void setTaskList(List<Task> taskList) {
