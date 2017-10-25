@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.NumberPicker;
 import android.widget.Spinner;
 
 import java.io.File;
@@ -16,30 +17,37 @@ import java.util.Calendar;
 
 public class YearActivity extends AppCompatActivity {
 
-    private Spinner year;
+    private NumberPicker mc;
+    private NumberPicker dy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_year);
 
-        ArrayList<String> years = new ArrayList<String>();
-        int thisYear = Calendar.getInstance().get(Calendar.YEAR);
-        for (int i = thisYear; i >= 1950; i--) {
-            years.add(Integer.toString(i));
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, years);
-        year = (Spinner)findViewById(R.id.yearspinner);
-        year.setAdapter(adapter);
+        mc = (NumberPicker)findViewById(R.id.numberPickerMC);
+        dy = (NumberPicker)findViewById(R.id.numberPickerDY);
 
+        dy.setFormatter(new NumberPicker.Formatter() {
+            @Override
+            public String format(int i) {
+                return String.format("%02d", i);
+            }
+        });
+
+        mc.setMinValue(19);
+        mc.setMaxValue(20);
+        dy.setMinValue(00);
+        dy.setMaxValue(99);
 
     }
 
     public void finishClick(View v) {
         String make = getIntent().getStringExtra("Make");
         String model = getIntent().getStringExtra("Model");
+        int year = mc.getValue() * 100 + dy.getValue();
         int carImage = getCarImage(make, model, year);
-        Car car = new Car(make, model, Integer.parseInt(year.getSelectedItem().toString()), carImage);
+        Car car = new Car(make, model, year, carImage);
 
         //Save car to internal storage
         FileOutputStream fStream = null;
@@ -78,7 +86,7 @@ public class YearActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private int getCarImage(String make, String model, Spinner year) {
+    private int getCarImage(String make, String model, int year) {
         return R.drawable.jeep;
     }
 }
