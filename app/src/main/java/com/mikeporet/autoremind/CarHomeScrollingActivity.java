@@ -27,7 +27,7 @@ public class CarHomeScrollingActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_car);
         setSupportActionBar(toolbar);
 
-        Car car = (Car) getIntent().getSerializableExtra("Car");
+        car = (Car) getIntent().getSerializableExtra("Car");
 
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.app_bar_car);
         appBarLayout.setBackground(getDrawable(car.getImage()));

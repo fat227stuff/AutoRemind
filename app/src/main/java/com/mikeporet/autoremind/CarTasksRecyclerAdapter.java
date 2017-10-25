@@ -97,7 +97,7 @@ public class CarTasksRecyclerAdapter extends RecyclerView.Adapter<CarTasksRecycl
         done.setText("DONE");
 
         ImageView image = holder.taskImage;
-        //instruction_image.setImageDrawable(getDrawable(current_task.getImage()));
+        image.setImageDrawable(image.getContext().getDrawable(task.getImage()));
         Log.d("imageTest", task.getImage()+"");
 
         //Log.d("imagedrawable", image.getDrawable().toString());
