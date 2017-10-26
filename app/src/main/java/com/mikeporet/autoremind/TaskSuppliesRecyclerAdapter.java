@@ -21,29 +21,41 @@ import java.util.List;
 
 public class TaskSuppliesRecyclerAdapter extends RecyclerView.Adapter<TaskSuppliesRecyclerAdapter.ViewHolder> {
     List<Supply> supplyTitle;
+    private Car car;
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView supplyTitleView;
         public TextView supplyDesc;
         public CardView supplyCard;
+        private Car car;
 
-        public ViewHolder(final View itemView) {
+        public ViewHolder(final View itemView, Car car) {
             super(itemView);
             supplyTitleView = (TextView) itemView.findViewById(R.id.checklistTitle);
             supplyDesc = (TextView) itemView.findViewById(R.id.checklistDes);
             supplyCard = (CardView) itemView.findViewById(R.id.checklistCard);
             supplyCard.setOnClickListener(this);
+            this.car = car;
         }
 
         @Override
         public void onClick(View v) {
             Log.d("testmebabyonemoretime", "poop scooping buggy");
-
-            String carMake = "Honda";
-            String carModel = "Civic";
-            String carYear = "2005";
             String supply = supplyTitleView.getText().toString();
-            String url = "https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dautomotive&field-keywords=" + carYear + "+" + carMake + "+" + carModel + " +" + supply;
+            String search_modifier = "";
+            String carMake = car.getMake();
+            String carModel = car.getModel();
+            String carYear = Integer.toString(car.getYear());
+
+             if ( supply.equals("Engine Oil") | supply.equals("Oil Filter")|supply.equals("Air Filter")|
+                     supply.equals("Battery")|supply.equals("Engine Coolant"))
+             {
+                 search_modifier = carYear + "+" + carMake + "+" + carModel + " +";
+             }
+
+
+
+            String url = "https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dautomotive&field-keywords=" + search_modifier + supply;
 
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse(url));
@@ -51,7 +63,8 @@ public class TaskSuppliesRecyclerAdapter extends RecyclerView.Adapter<TaskSuppli
         }
     }
 
-    public TaskSuppliesRecyclerAdapter(List<Supply> supplyTitle) {
+    public TaskSuppliesRecyclerAdapter(List<Supply> supplyTitle, Car car) {
+        this.car = car;
         this.supplyTitle = supplyTitle;
     }
 
@@ -61,7 +74,7 @@ public class TaskSuppliesRecyclerAdapter extends RecyclerView.Adapter<TaskSuppli
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View contactView = inflater.inflate(R.layout.checklist_card, parent, false);
-        TaskSuppliesRecyclerAdapter.ViewHolder viewHolder = new TaskSuppliesRecyclerAdapter.ViewHolder(contactView);
+        TaskSuppliesRecyclerAdapter.ViewHolder viewHolder = new TaskSuppliesRecyclerAdapter.ViewHolder(contactView, car);
         return viewHolder;
     }
 

@@ -38,17 +38,20 @@ public class TaskInstructionsActivity extends AppCompatActivity {
     private RecyclerView stepsReView;
     private TextView taskTitle;
     private TextView taskDate;
+    private Car car;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_instructions);
         final Task current_task =(Task) getIntent().getSerializableExtra("Task");
+        car = (Car) getIntent().getSerializableExtra("Car");
         taskTitle = (TextView) findViewById(R.id.task_page_title);
         taskTitle.setText(current_task.getTitle());
         setTitle("");
         taskDate = (TextView) findViewById(R.id.task_page_date);
-        taskDate.setText(current_task.dueDateToString());
+        String date_text = "Due on " + current_task.dueDateToString();
+        taskDate.setText(date_text);
 
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.instruction_bar);
         appBarLayout.setBackground(getDrawable(current_task.getImage()));
@@ -58,7 +61,7 @@ public class TaskInstructionsActivity extends AppCompatActivity {
 
         List<Supply> supplies = current_task.getSupplies();
 
-        TaskSuppliesRecyclerAdapter adapter = new TaskSuppliesRecyclerAdapter(supplies);
+        TaskSuppliesRecyclerAdapter adapter = new TaskSuppliesRecyclerAdapter(supplies, car);
         suppliesReView.setAdapter(adapter);
         suppliesReView.setLayoutManager(new LinearLayoutManager(this));
 

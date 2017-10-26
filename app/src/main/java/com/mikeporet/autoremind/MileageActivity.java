@@ -110,13 +110,13 @@ public class MileageActivity extends AppCompatActivity {
         Calendar c = Calendar.getInstance();
         c.getTime();
         c.set(2017, Calendar.NOVEMBER, 12);
-        taskList.add(new Task("Oil Change", R.drawable.oilchange, 5000, 1, 1, oil_steps, oilChangeSupplies, "", c.getTime()));
+        taskList.add(new Task("Oil Change", R.drawable.oilchange, 5000, 2, 2, oil_steps, oilChangeSupplies, "", c.getTime()));
         c.set(2017, Calendar.OCTOBER, 31);
-        taskList.add(new Task("Air Filter", R.drawable.airfilter, 8000, 2, 3, coolant_steps, airFilterSupplies, "", c.getTime()));
+        taskList.add(new Task("Air Filter", R.drawable.airfilter, 8000, 1, 1, air_filter_steps, airFilterSupplies, "", c.getTime()));
         c.set(2017, Calendar.DECEMBER, 28);
-        taskList.add(new Task("Battery Replacement", R.drawable.batteryreplacement, 50000, 3, 2, battery_steps, batterySupplies, "", c.getTime()));
+        taskList.add(new Task("Battery Replacement", R.drawable.batteryreplacement, 50000, 1, 1, battery_steps, batterySupplies, "", c.getTime()));
         c.set(2018, Calendar.JANUARY, 7);
-        taskList.add(new Task("Coolant Flush", R.drawable.coolantflush, 10000, 1, 2, air_filter_steps, coolantSupplies, "", c.getTime()));
+        taskList.add(new Task("Coolant Flush", R.drawable.coolantflush, 10000, 3, 2, coolant_steps, coolantSupplies, "", c.getTime()));
         return taskList;
     }
 }
