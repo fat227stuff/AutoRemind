@@ -1,14 +1,18 @@
 package com.mikeporet.autoremind;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by mikeporet on 10/11/17.
  */
 
-class Task implements Serializable {
+class Task implements Serializable, Comparable {
 
     private String title;
     private int image;
@@ -18,10 +22,10 @@ class Task implements Serializable {
     private String[] steps;
     private List<Supply> supplies;
     private String video_url;
-    private String date;
+    private Date date;
 
 
-    public Task(String title, int image, int interval, int difficulty, int num_people, String[] steps, List<Supply> supplies, String video_url, String date) {
+    public Task(String title, int image, int interval, int difficulty, int num_people, String[] steps, List<Supply> supplies, String video_url, Date date) {
         this.title = title;
         this.image = image;
         this.interval = interval;
@@ -31,6 +35,18 @@ class Task implements Serializable {
         this.supplies = supplies;
         this.video_url = video_url;
         this.date = date;
+    }
+
+    public void recomputeDate(double mileage) {
+        double numWeeks = interval / mileage;
+        Calendar c = Calendar.getInstance();
+        c.getTime();
+        c.add(Calendar.DATE, (int)numWeeks * 7);
+        date = c.getTime();
+    }
+
+    @Override
+    public int compareTo(@NonNull Object o) {return this.date.compareTo(((Task) o).date);
     }
 
     public List<Supply> getSupplies() {
@@ -67,7 +83,12 @@ class Task implements Serializable {
     }
 
 
-    public String getDate() {
+    public String dueDateToString() {
+        DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
+        return df.format(date);
+    }
+
+    public Date getDate() {
         return date;
     }
 

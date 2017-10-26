@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
+import java.util.Collections;
 import java.util.List;
 
 public class CarHomeScrollingActivity extends AppCompatActivity {
@@ -15,6 +16,8 @@ public class CarHomeScrollingActivity extends AppCompatActivity {
     private Car car;
     private RecyclerView recyclerView;
     private List<Task> taskList;
+    private CarTasksRecyclerAdapter adapter;
+    private double mileage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +37,9 @@ public class CarHomeScrollingActivity extends AppCompatActivity {
         taskList = storage.getTasks(0);
         recyclerView = (RecyclerView) findViewById(R.id.rv);
 
-        CarTasksRecyclerAdapter adapter = new CarTasksRecyclerAdapter(taskList);
+        Collections.sort(taskList);
+        mileage = storage.getMileage(0);
+        adapter = new CarTasksRecyclerAdapter(taskList, storage.getMileage(0));
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -64,4 +69,17 @@ public class CarHomeScrollingActivity extends AppCompatActivity {
         return taskList;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Task doneTask = (Task)  getIntent().getSerializableExtra("finnishedTask");
+        if (doneTask != null)
+        {
+            doneTask.recomputeDate(mileage);
+            Collections.sort(taskList);
+            adapter.notifyDataSetChanged();
+        }
+
+    }
 }
+

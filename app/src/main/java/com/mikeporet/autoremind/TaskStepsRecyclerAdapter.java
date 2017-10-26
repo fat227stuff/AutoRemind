@@ -59,7 +59,9 @@ public class TaskStepsRecyclerAdapter extends RecyclerView.Adapter<TaskStepsRecy
     @Override
     public void onBindViewHolder(TaskStepsRecyclerAdapter.ViewHolder holder, int position) {
         TextView name = holder.stepTitleView;
-        name.setText(steps[position]);
+        name.setText("Step" + (position + 1));
+        TextView desc = holder.stepDesc;
+        desc.setText(steps[position]);
 
     }
 

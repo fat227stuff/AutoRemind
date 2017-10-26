@@ -29,6 +29,7 @@ import android.net.Uri;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 public class TaskInstructionsActivity extends AppCompatActivity {
@@ -75,6 +76,13 @@ public class TaskInstructionsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Done!", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                ArrayList<Task> tasks = (ArrayList<Task>) getIntent().getSerializableExtra("Tasks");
+                double mileage =  getIntent().getDoubleExtra("Mileage",0.0);
+                ((Task) getIntent().getSerializableExtra("Task")).recomputeDate(mileage);
+                Collections.sort(tasks);
+                Intent intent = new Intent();
+                intent.putExtra("finnishedTask", getIntent().getSerializableExtra("Task"));
+                setResult(RESULT_OK, intent);
                 finish();
             }
         });

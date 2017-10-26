@@ -14,7 +14,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class MileageActivity extends AppCompatActivity {
@@ -139,10 +142,17 @@ public class MileageActivity extends AppCompatActivity {
         list.add(new Supply("Oil", R.drawable.oil_bottle, "This is a bottle of oil"));
 
         List<Task> taskList = new ArrayList<>();
-        taskList.add(new Task("Oil Change", R.drawable.oilchange, 0, 1, 1, oil_steps, null, "", "Oct 31, 2017"));
-        taskList.add(new Task("Air Filter", R.drawable.airfilter, 0, 2, 3, coolant_steps, null, "", "Nov 1, 2017"));
-        taskList.add(new Task("Battery Replacement", R.drawable.batteryreplacement, 0, 3, 2, battery_steps, null, "", "Nov 31, 2017"));
-        taskList.add(new Task("Coolant Flush", R.drawable.coolantflush, 0, 1, 2, air_filter_steps, null, "", "Dec 1, 2017"));
+        int pooder = Calendar.APRIL;
+        Calendar c = Calendar.getInstance();
+        c.getTime();
+        c.set(2017, Calendar.NOVEMBER, 12);
+        taskList.add(new Task("Oil Change", R.drawable.oilchange, 5000, 1, 1, oil_steps, list, "", c.getTime()));
+        c.set(2017, Calendar.OCTOBER, 31);
+        taskList.add(new Task("Air Filter", R.drawable.airfilter, 8000, 2, 3, coolant_steps, list, "", c.getTime()));
+        c.set(2017, Calendar.DECEMBER, 28);
+        taskList.add(new Task("Battery Replacement", R.drawable.batteryreplacement, 50000, 3, 2, battery_steps, list, "", c.getTime()));
+        c.set(2018, Calendar.JANUARY, 7);
+        taskList.add(new Task("Coolant Flush", R.drawable.coolantflush, 10000, 1, 2, air_filter_steps, list, "", c.getTime()));
         return taskList;
     }
 }

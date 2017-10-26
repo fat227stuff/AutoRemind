@@ -11,6 +11,7 @@
     android:layout_marginBottom="0dp"
     android:clickable="true"
     android:focusable="true"
+    android:id="@+id/carTaskCard"
     app:cardElevation="3dp"
     android:orientation="vertical"
     android:paddingBottom="15dp"
