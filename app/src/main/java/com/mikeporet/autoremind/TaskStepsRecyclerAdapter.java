@@ -22,13 +22,11 @@ public class TaskStepsRecyclerAdapter extends RecyclerView.Adapter<TaskStepsRecy
 
         public TextView stepTitleView;
         public TextView stepDesc;
-        public ImageView stepImage;
 
         public ViewHolder(final View itemView) {
             super(itemView);
             stepTitleView = (TextView) itemView.findViewById(R.id.checklistTitle);
             stepDesc = (TextView) itemView.findViewById(R.id.checklistDes);
-            stepImage = (ImageView) itemView.findViewById(R.id.checklistIcon);
         }
 
         @Override
@@ -59,7 +57,7 @@ public class TaskStepsRecyclerAdapter extends RecyclerView.Adapter<TaskStepsRecy
     @Override
     public void onBindViewHolder(TaskStepsRecyclerAdapter.ViewHolder holder, int position) {
         TextView name = holder.stepTitleView;
-        name.setText("Step" + (position + 1));
+        name.setText("Step " + (position + 1));
         TextView desc = holder.stepDesc;
         desc.setText(steps[position]);
 

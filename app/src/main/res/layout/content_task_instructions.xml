@@ -20,15 +20,25 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_margin="10dp"
+            android:layout_marginBottom="5dp"
             android:text="Oil Change"
             android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/task_page_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@+id/task_page_title"
+            android:text="TextView" />
 
         <TextView
             android:id="@+id/suppliesLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/task_page_title"
+            android:layout_below="@+id/task_page_date"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:text="Supplies"

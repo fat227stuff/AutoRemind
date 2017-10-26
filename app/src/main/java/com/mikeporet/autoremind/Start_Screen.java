@@ -5,19 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -29,25 +23,18 @@ public class Start_Screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start__screen);
 
-        String fileName = "car.srl";
+        Storage storage = DataSaver.fetchFile(this);
 
-        File directory = new File(getFilesDir() + File.pathSeparator + fileName);
-        Car car = null;
-        try {
-            FileInputStream fStream = new FileInputStream(directory);
-            ObjectInputStream is = new ObjectInputStream(fStream);
-            car = (Car) is.readObject();
-        } catch (Exception e) {
-            Log.d("FileInputError", e.toString());
-        }
-        if(car != null) {
-            Log.d("CarRetrieved", car.toString());
+
+        if(storage != null) {
+            Log.d("CarRetrieved", storage.getCar(0).toString());
             Intent intent = new Intent(this, CarHomeScrollingActivity.class);
-            intent.putExtra("Car", car);
+            intent.putExtra("Storage", storage);
             startActivity(intent);
         } else {
             Log.d("CarIsNull", "Car is Null");
         }
+
         makesModels = new HashMap<>();
         try {
             JSONObject obj = new JSONObject(loadJSONFromAsset());
@@ -68,6 +55,7 @@ public class Start_Screen extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
 
     }
 

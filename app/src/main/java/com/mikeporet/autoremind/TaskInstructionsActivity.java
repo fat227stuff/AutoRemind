@@ -34,16 +34,21 @@ import java.util.List;
 
 public class TaskInstructionsActivity extends AppCompatActivity {
 
-    private TextView taskBodyText;
     private RecyclerView suppliesReView;
     private RecyclerView stepsReView;
+    private TextView taskTitle;
+    private TextView taskDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_instructions);
         final Task current_task =(Task) getIntent().getSerializableExtra("Task");
-        setTitle(current_task.getTitle());
+        taskTitle = (TextView) findViewById(R.id.task_page_title);
+        taskTitle.setText(current_task.getTitle());
+        setTitle("");
+        taskDate = (TextView) findViewById(R.id.task_page_date);
+        taskDate.setText(current_task.dueDateToString());
 
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.instruction_bar);
         appBarLayout.setBackground(getDrawable(current_task.getImage()));
@@ -76,13 +81,17 @@ public class TaskInstructionsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Done!", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                Car car = (Car)getIntent().getSerializableExtra("Car");
                 ArrayList<Task> tasks = (ArrayList<Task>) getIntent().getSerializableExtra("Tasks");
+                int result = -1;
+                for (int i = 0; i < tasks.size(); i++) {
+                    if (tasks.get(i).getTitle().equals(current_task.getTitle())) {
+                        result = i;
+                    }
+                }
                 double mileage =  getIntent().getDoubleExtra("Mileage",0.0);
-                ((Task) getIntent().getSerializableExtra("Task")).recomputeDate(mileage);
-                Collections.sort(tasks);
-                Intent intent = new Intent();
-                intent.putExtra("finnishedTask", getIntent().getSerializableExtra("Task"));
-                setResult(RESULT_OK, intent);
+                tasks.get(result).recomputeDate(mileage);
+                DataSaver.updateFile(car, tasks, mileage, TaskInstructionsActivity.this);
                 finish();
             }
         });

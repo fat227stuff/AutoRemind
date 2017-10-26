@@ -10,11 +10,9 @@ public class Supply implements Serializable {
 
     private String title;
     private String subTitle;
-    private int image;
 
-    public Supply(String title, int image, String subTitle) {
+    public Supply(String title, String subTitle) {
         this.title = title;
-        this.image = image;
         this.subTitle = subTitle;
     }
 
@@ -22,16 +20,8 @@ public class Supply implements Serializable {
         return title;
     }
 
-    public int getImage() {
-        return image;
-    }
-
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public void setImage(int image) {
-        this.image = image;
     }
 
     public String getSubTitle() {

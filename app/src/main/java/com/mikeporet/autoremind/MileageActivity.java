@@ -2,6 +2,7 @@ package com.mikeporet.autoremind;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,12 +35,27 @@ public class MileageActivity extends AppCompatActivity {
     public void finishClick(View v) {
         Car car = (Car)getIntent().getSerializableExtra("Car");
         List<Task> tasks = getTasks(car, v.getResources());
-        double mileage = Double.parseDouble(mileateInput.getText().toString());
+        String miles = mileateInput.getText().toString();
+        double mileage = 0.0;
 
-        Storage storage = setUpStorage(car, tasks, mileage);
-        Intent intent = new Intent(this, CarHomeScrollingActivity.class);
-        intent.putExtra("Storage", storage);
-        startActivity(intent);
+        if (miles != "")
+        {
+            try {
+                mileage = Double.parseDouble(mileateInput.getText().toString());
+            } catch (Exception e) {
+                Snackbar.make(v, "Input a valid number", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                return;
+            }
+
+            Storage storage = setUpStorage(car, tasks, mileage);
+            Intent intent = new Intent(this, CarHomeScrollingActivity.class);
+            intent.putExtra("Storage", storage);
+            startActivity(intent);}
+        else{
+            Snackbar.make(v, "Input a valid number", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        }
     }
 
     public void skipClick(View v) {
@@ -55,76 +71,7 @@ public class MileageActivity extends AppCompatActivity {
 
     private Storage setUpStorage(Car car, List<Task> tasks, double mileage){
 
-        String fileName = "storage.srl";
-        File directory = new File(getFilesDir() + File.pathSeparator + fileName);
-
-        Storage storage = null;
-
-        //Get Storage file so we can append new information
-        FileInputStream fIStream = null;
-        ObjectInputStream oIStream = null;
-
-        try {
-            fIStream = new FileInputStream(directory);
-            oIStream = new ObjectInputStream(fIStream);
-            storage = (Storage) oIStream.readObject();
-        } catch (Exception e) {
-            Log.d("FileInputError", e.toString());
-        } finally {
-            if(fIStream != null) {
-                try {
-                    fIStream.close();
-                } catch (Exception e) {
-                    Log.d("FileStream Close Error", e.toString());
-                }
-            }
-            if(oIStream != null) {
-                try {
-                    oIStream.close();
-                } catch (Exception e) {
-                    Log.d("ObjStream Close Error", e.toString());
-                }
-            }
-        }
-        if(storage != null) {
-            if (storage.size() < 1){
-                storage.addCar(car, tasks, mileage);
-            } else {
-                storage.setCar(0, car, tasks, mileage);
-            }
-        } else {
-            Log.d("StorageIsNull", "making a new storage");
-            storage = new Storage();
-            storage.addCar(car, tasks, mileage);
-        }
-
-        //Save car to internal storage
-        FileOutputStream fStream = null;
-        ObjectOutputStream oStream = null;
-
-        try {
-            fStream = new FileOutputStream(directory);
-            oStream = new ObjectOutputStream(fStream);
-            oStream.writeObject(storage);
-            Log.d("WriteSuccess", "WriteSuccess");
-        } catch (Exception e) {
-            Log.d("FileStreamError", e.toString());
-        } finally {
-            if(fStream != null) {
-                try {
-                    fStream.close();
-                } catch (Exception e) {
-                    Log.d("FileStream Close Error", e.toString());
-                }
-            }
-            if(oStream != null) {
-                try {
-                    oStream.close();
-                } catch (Exception e) {
-                    Log.d("ObjStream Close Error", e.toString());
-                }
-            }
-        }
+        Storage storage = DataSaver.updateFile(car, tasks, mileage, this);
 
         return storage;
     }
@@ -136,23 +83,40 @@ public class MileageActivity extends AppCompatActivity {
         String[] battery_steps = res.getStringArray(R.array.battery_change_steps);
         String[] air_filter_steps = res.getStringArray(R.array.air_filter_change_steps);
 
-        ArrayList<Supply> list = new ArrayList<>();
-        list.add(new Supply("Oil Pan", R.drawable.oil_bottle, "This is a bottle of oil"));
-        list.add(new Supply("Oil Filter", R.drawable.oil_bottle, "This is a bottle of oil"));
-        list.add(new Supply("Oil", R.drawable.oil_bottle, "This is a bottle of oil"));
+        ArrayList<Supply> oilChangeSupplies = new ArrayList<>();
+        oilChangeSupplies.add(new Supply("Engine Oil", ""));
+        oilChangeSupplies.add(new Supply("Oil Filter", ""));
+        oilChangeSupplies.add(new Supply("Paper Towels", ""));
+        oilChangeSupplies.add(new Supply("Funnel", ""));
+        oilChangeSupplies.add(new Supply("Oil Catch Can", "You can use a large container like a Rubbermaid"));
+        oilChangeSupplies.add(new Supply("Socket Set", ""));
+        oilChangeSupplies.add(new Supply("Oil Filter Wrench", ""));
+
+        ArrayList<Supply> airFilterSupplies = new ArrayList<>();
+        airFilterSupplies.add(new Supply("Air Filter", ""));
+
+        ArrayList<Supply> batterySupplies = new ArrayList<>();
+        batterySupplies.add(new Supply("Battery", ""));
+        batterySupplies.add(new Supply("Socket Set", ""));
+
+        ArrayList<Supply> coolantSupplies = new ArrayList<>();
+        coolantSupplies.add(new Supply("Engine Coolant", "50/50 Premixed"));
+        coolantSupplies.add(new Supply("Engine Coolant Catch Can", "You can use a large container like a Rubbermaid"));
+        coolantSupplies.add(new Supply("Paper Towels", ""));
+        coolantSupplies.add(new Supply("Garden Hose", ""));
 
         List<Task> taskList = new ArrayList<>();
         int pooder = Calendar.APRIL;
         Calendar c = Calendar.getInstance();
         c.getTime();
         c.set(2017, Calendar.NOVEMBER, 12);
-        taskList.add(new Task("Oil Change", R.drawable.oilchange, 5000, 1, 1, oil_steps, list, "", c.getTime()));
+        taskList.add(new Task("Oil Change", R.drawable.oilchange, 5000, 1, 1, oil_steps, oilChangeSupplies, "", c.getTime()));
         c.set(2017, Calendar.OCTOBER, 31);
-        taskList.add(new Task("Air Filter", R.drawable.airfilter, 8000, 2, 3, coolant_steps, list, "", c.getTime()));
+        taskList.add(new Task("Air Filter", R.drawable.airfilter, 8000, 2, 3, coolant_steps, airFilterSupplies, "", c.getTime()));
         c.set(2017, Calendar.DECEMBER, 28);
-        taskList.add(new Task("Battery Replacement", R.drawable.batteryreplacement, 50000, 3, 2, battery_steps, list, "", c.getTime()));
+        taskList.add(new Task("Battery Replacement", R.drawable.batteryreplacement, 50000, 3, 2, battery_steps, batterySupplies, "", c.getTime()));
         c.set(2018, Calendar.JANUARY, 7);
-        taskList.add(new Task("Coolant Flush", R.drawable.coolantflush, 10000, 1, 2, air_filter_steps, list, "", c.getTime()));
+        taskList.add(new Task("Coolant Flush", R.drawable.coolantflush, 10000, 1, 2, air_filter_steps, coolantSupplies, "", c.getTime()));
         return taskList;
     }
 }

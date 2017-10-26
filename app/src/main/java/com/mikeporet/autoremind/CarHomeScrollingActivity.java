@@ -18,6 +18,7 @@ public class CarHomeScrollingActivity extends AppCompatActivity {
     private List<Task> taskList;
     private CarTasksRecyclerAdapter adapter;
     private double mileage;
+    private boolean loopstop = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class CarHomeScrollingActivity extends AppCompatActivity {
 
         Collections.sort(taskList);
         mileage = storage.getMileage(0);
-        adapter = new CarTasksRecyclerAdapter(taskList, storage.getMileage(0));
+        adapter = new CarTasksRecyclerAdapter(taskList, storage.getMileage(0), car);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -72,14 +73,24 @@ public class CarHomeScrollingActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Task doneTask = (Task)  getIntent().getSerializableExtra("finnishedTask");
-        if (doneTask != null)
-        {
-            doneTask.recomputeDate(mileage);
-            Collections.sort(taskList);
-            adapter.notifyDataSetChanged();
-        }
+        Storage s = DataSaver.fetchFile(this);
+        this.car = s.getCar(0);
+        this.taskList = s.getTasks(0);
+        this.mileage = s.getMileage(0);
 
+//        Task doneTask = (Task)  getIntent().getSerializableExtra("finnishedTask");
+//        recyclerView.setAdapter(null);
+//        recyclerView.setLayoutManager(null);
+//        recyclerView.setAdapter(adapter);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        adapter.notifyDataSetChanged();
+        adapter.reset_content();
+
+    }
+
+    protected void onPause() {
+        super.onPause();
+        DataSaver.updateFile(car, taskList, mileage, this);
     }
 }
 

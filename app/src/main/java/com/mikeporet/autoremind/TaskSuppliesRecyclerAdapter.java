@@ -25,14 +25,12 @@ public class TaskSuppliesRecyclerAdapter extends RecyclerView.Adapter<TaskSuppli
 
         public TextView supplyTitleView;
         public TextView supplyDesc;
-        public ImageView supplyImage;
         public CardView supplyCard;
 
         public ViewHolder(final View itemView) {
             super(itemView);
             supplyTitleView = (TextView) itemView.findViewById(R.id.checklistTitle);
             supplyDesc = (TextView) itemView.findViewById(R.id.checklistDes);
-            supplyImage = (ImageView) itemView.findViewById(R.id.checklistIcon);
             supplyCard = (CardView) itemView.findViewById(R.id.checklistCard);
             supplyCard.setOnClickListener(this);
         }
