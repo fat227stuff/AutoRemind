@@ -1,5 +1,6 @@
 package com.mikeporet.autoremind;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,47 +47,17 @@ public class YearActivity extends AppCompatActivity {
         String make = getIntent().getStringExtra("Make");
         String model = getIntent().getStringExtra("Model");
         int year = mc.getValue() * 100 + dy.getValue();
-        int carImage = getCarImage(make, model, year);
+        int carImage = getCarImage(make, model, year, v.getContext());
         Car car = new Car(make, model, year, carImage);
 
-        //Save car to internal storage
-        FileOutputStream fStream = null;
-        ObjectOutputStream oStream = null;
-
-        String fileName = "car.srl";
-        File directory = new File(getFilesDir() + File.pathSeparator + fileName);
-
-        try {
-            fStream = new FileOutputStream(directory);
-            oStream = new ObjectOutputStream(fStream);
-            oStream.writeObject(car);
-            Log.d("WriteSuccess", "WriteSuccess");
-        } catch (Exception e) {
-            Log.d("FileStreamError", e.toString());
-        } finally {
-            if(fStream != null) {
-                try {
-                    fStream.close();
-                } catch (Exception e) {
-                    Log.d("FileStream Close Error", e.toString());
-                }
-            }
-            if(oStream != null) {
-                try {
-                    oStream.close();
-                } catch (Exception e) {
-                    Log.d("ObjStream Close Error", e.toString());
-                }
-            }
-        }
-
-
-        Intent intent = new Intent(this, CarHomeScrollingActivity.class);
+        Intent intent = new Intent(this, MileageActivity.class);
         intent.putExtra("Car", car);
         startActivity(intent);
     }
 
-    private int getCarImage(String make, String model, int year) {
-        return R.drawable.jeep;
+    private int getCarImage(String make, String model, int year, Context context) {
+        String packageName = context.getPackageName();
+        int result = context.getResources().getIdentifier(make.toLowerCase(), "drawable", packageName);
+        return result;
     }
 }

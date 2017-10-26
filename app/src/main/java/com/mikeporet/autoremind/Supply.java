@@ -1,17 +1,21 @@
 package com.mikeporet.autoremind;
 
+import java.io.Serializable;
+
 /**
  * Created by mikeporet on 10/18/17.
  */
 
-public class Supply {
+public class Supply implements Serializable {
 
     private String title;
+    private String subTitle;
     private int image;
 
-    public Supply(String title, int image) {
+    public Supply(String title, int image, String subTitle) {
         this.title = title;
         this.image = image;
+        this.subTitle = subTitle;
     }
 
     public String getTitle() {
@@ -28,5 +32,13 @@ public class Supply {
 
     public void setImage(int image) {
         this.image = image;
+    }
+
+    public String getSubTitle() {
+        return subTitle;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
     }
 }

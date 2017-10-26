@@ -2,6 +2,7 @@ package com.mikeporet.autoremind;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mikeporet on 10/11/17.
@@ -14,13 +15,13 @@ class Task implements Serializable {
     private int interval;
     private int difficulty;
     private int num_people;
-    private ArrayList<String> steps;
-    private ArrayList<Supply> supplies;
+    private String[] steps;
+    private List<Supply> supplies;
     private String video_url;
     private String date;
 
 
-    public Task(String title, int image, int interval, int difficulty, int num_people, ArrayList<String> steps, ArrayList<Supply> supplies, String video_url, String date) {
+    public Task(String title, int image, int interval, int difficulty, int num_people, String[] steps, List<Supply> supplies, String video_url, String date) {
         this.title = title;
         this.image = image;
         this.interval = interval;
@@ -32,11 +33,11 @@ class Task implements Serializable {
         this.date = date;
     }
 
-    public ArrayList<Supply> getSupplies() {
+    public List<Supply> getSupplies() {
         return supplies;
     }
 
-    public void setSupplies(ArrayList<Supply> supplies) {
+    public void setSupplies(List<Supply> supplies) {
         this.supplies = supplies;
     }
 
@@ -52,7 +53,7 @@ class Task implements Serializable {
         this.num_people = num_people;
     }
 
-    public void setSteps(ArrayList<String> steps) {
+    public void setSteps(String[] steps) {
         this.steps = steps;
     }
 
@@ -64,6 +65,7 @@ class Task implements Serializable {
 
         return interval;
     }
+
 
     public String getDate() {
         return date;
@@ -77,7 +79,7 @@ class Task implements Serializable {
         return num_people;
     }
 
-    public ArrayList<String> getSteps() {
+    public String[] getSteps() {
         return steps;
     }
 

@@ -14,6 +14,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
 import android.support.v7.view.menu.MenuView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -32,6 +34,8 @@ import java.util.List;
 public class TaskInstructionsActivity extends AppCompatActivity {
 
     private TextView taskBodyText;
+    private RecyclerView suppliesReView;
+    private RecyclerView stepsReView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,36 +44,27 @@ public class TaskInstructionsActivity extends AppCompatActivity {
         final Task current_task =(Task) getIntent().getSerializableExtra("Task");
         setTitle(current_task.getTitle());
 
-        android.support.v4.app.NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this).setSmallIcon(R.drawable.ar_notification).setContentTitle("My notification").setContentText("Hello World");
-        Intent resultIntent = new Intent(this, CarHomeScrollingActivity.class);
-
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        stackBuilder.addNextIntent(resultIntent);
-        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-        mBuilder.setContentIntent(resultPendingIntent);
-        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        taskBodyText = (TextView) findViewById(R.id.task_instructions_body);
-        //ImageView instruction_image = (ImageView) findViewById(R.id.instructionpic);
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.instruction_bar);
         appBarLayout.setBackground(getDrawable(current_task.getImage()));
 
-        switch (current_task.getTitle()) {
-            case "Oil Change":
-                taskBodyText.setText(R.string.oil_instuctions);
-                //instruction_image.setImageDrawable(getDrawable(R.drawable.oilchange));
-                break;
-            case "Air Filter":
-                taskBodyText.setText(R.string.air_filter_instructions);
-                break;
-            case "Battery Replacement":
-                taskBodyText.setText(R.string.battery_replacement_instuctions);
-                break;
-            case "Coolant Flush":
-                taskBodyText.setText(R.string.coolant_flush_instuctions);
-                break;
-        }
+        //Get Supplies
+        suppliesReView = (RecyclerView) findViewById(R.id.suppliesReView);
 
+        List<Supply> supplies = current_task.getSupplies();
+
+        TaskSuppliesRecyclerAdapter adapter = new TaskSuppliesRecyclerAdapter(supplies);
+        suppliesReView.setAdapter(adapter);
+        suppliesReView.setLayoutManager(new LinearLayoutManager(this));
+
+        //Set up Task Steps
+        stepsReView = (RecyclerView) findViewById(R.id.stepsReView);
+
+        String[] steps = current_task.getSteps();
+        TaskStepsRecyclerAdapter stepAdapter = new TaskStepsRecyclerAdapter(steps);
+        stepsReView.setAdapter(stepAdapter);
+        stepsReView.setLayoutManager(new LinearLayoutManager(this));
+
+        //Keep doing the regular stuff
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

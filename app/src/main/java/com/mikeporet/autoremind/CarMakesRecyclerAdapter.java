@@ -10,12 +10,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by mikeporet on 10/18/17.
  */
 
 public class CarMakesRecyclerAdapter extends RecyclerView.Adapter<CarMakesRecyclerAdapter.ViewHolder> {
+    private final HashMap<String, ArrayList<String>> makesModels;
     ArrayList<String> makeList;
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -36,13 +38,17 @@ public class CarMakesRecyclerAdapter extends RecyclerView.Adapter<CarMakesRecycl
 
 
             Intent intent = new Intent(v.getContext(), ModelActivity.class);
-            intent.putExtra("Make", makeList.get(getAdapterPosition()));
+            String makeName = makeList.get(getAdapterPosition());
+            intent.putExtra("Make", makeName);
+            ArrayList<String> models = makesModels.get(makeName);
+            intent.putExtra("Models", models);
             itemView.getContext().startActivity(intent);
         }
     }
 
-    public CarMakesRecyclerAdapter(ArrayList<String> makeList) {
+    public CarMakesRecyclerAdapter(ArrayList<String> makeList, HashMap<String, ArrayList<String>> makesModels) {
         this.makeList = makeList;
+        this.makesModels = makesModels;
     }
 
 

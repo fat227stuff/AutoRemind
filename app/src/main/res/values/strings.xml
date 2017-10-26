@@ -151,4 +151,44 @@ If it’s low again in a few more days, have the system checked at a service fac
     </string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_car_home_scrolling">CarHomeScrollingActivity</string>
+    <string-array name="oil_steps">
+        <item>"Run the engine until it is warm"</item>
+        <item>"Place the oil catch pan directly under the drain plug on the vehicle"</item>
+        <item>"Remove the oil drain bolt and wait for the oil to drain (5-10min)"</item>
+        <item>"Move the oil catch pan directly under the oil filter"</item>
+        <item>"Remove the oil filter using the oil filter wrench and allow to drain"</item>
+        <item>"Install new oil filter. Screw it on until it's tight, but not torqued down really hard"</item>
+        <item>"Install oil drain plug. Again, screw it on until it's tight, but not torqued down really hard"</item>
+        <item>"Pour the new oil into the engine via the "engine oil" filler cap on top of the engine"</item>
+        <item>"Take the old oil to your local auto parts store for disposal"</item>
+    </string-array>
+    <string-array name="air_filter_change_steps">
+            <item>"Locate the air box (usually located near the front of the engine)"</item>
+            <item>"Unclamp the air box lid and remove it"</item>
+            <item>"Remove the old air filter"</item>
+            <item>"Remove any debris in the air box (Be careful not to push debris down the engine intake tube)"</item>
+            <item>"Insert new air filter"</item>
+            <item>"Clamp air box shut"</item>
+    </string-array>
+    <string-array name="battery_change_steps">
+            <item>"Turn off all car electronics (lights, ignition, etc)"</item>
+            <item>"Use a socket to loosen battery terminal clamps"</item>
+            <item>"Remove first the negative (black) then the positive (red) wires"</item>
+            <item>"Remove the old battery and insert the new one"</item>
+            <item>"Verify that the negative and positive terminals are on the correct side to match with the wires"</item>
+            <item>"Reconnect wires and tighten clamps"</item>
+    </string-array>
+    <string-array name="coolant_flush_steps">
+            <item>"Park the car with the front end elevated"</item>
+            <item>"Place the engine coolant catch pan beneath the radiator"</item>
+            <item>"Pull the radiator hose off of the bottom and allow coolant to drain into the pan"</item>
+            <item>"Place the coolant catch pan beneath the heater lines"</item>
+            <item>"Disconnect the hoses and allow coolant to drain"</item>
+            <item>"Using a garden hose, flush out the heater lines in both directions until liquid turns clear"</item>
+            <item>"Add new coolant to the heater hoses until coolant runs out the other side"</item>
+            <item>"Reconnect all hoses"</item>
+            <item>"Fill radiator and coolant reservoir with new coolant"</item>
+            <item>"Run the engine with the radiator cap off to allow air to escape (DO NOT DRIVE)"</item>
+            <item>"Top off reservoir and Radiator as needed"</item>
+    </string-array>
 </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/checklistCard"
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -23,7 +24,7 @@
             app:srcCompat="@drawable/oil_bottle" />
 
         <TextView
-            android:id="@+id/checklistDescription"
+            android:id="@+id/checklistTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/checklistIcon"
@@ -38,15 +39,15 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="10dp"
-            android:layout_toEndOf="@+id/checklistTitle"
+            android:layout_toEndOf="@+id/checklistDes"
             android:checked="false" />
 
         <TextView
-            android:id="@+id/checklistTitle"
+            android:id="@+id/checklistDes"
             android:layout_width="220dp"
             android:layout_height="30dp"
             android:layout_alignBottom="@+id/checklistIcon"
-            android:layout_alignStart="@+id/checklistDescription"
+            android:layout_alignStart="@+id/checklistTitle"
             android:text="This will be a short description of the part that the user will need to get." />
 
     </RelativeLayout>

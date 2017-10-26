@@ -18,7 +18,7 @@ public class ModelActivity extends AppCompatActivity {
         setContentView(R.layout.activity_makes);
 
         String make = getIntent().getStringExtra("Make");
-        modelList = createModelList(make);
+        modelList = (ArrayList<String>) getIntent().getSerializableExtra("Models");
 
         recyclerView = (RecyclerView) findViewById(R.id.makerv);
 

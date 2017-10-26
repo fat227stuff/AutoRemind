@@ -8,23 +8,64 @@
     tools:context="com.mikeporet.autoremind.TaskInstructionsActivity"
     tools:showIn="@layout/activity_task_instructions">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
         <TextView
-            android:id="@+id/task_instructions_body"
+            android:id="@+id/task_page_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:text="@string/large_text" />
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="10dp"
+            android:text="Oil Change"
+            android:textSize="30sp" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/suppliesLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/task_page_title"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="Supplies"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/suppliesReView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/suppliesLabel"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/stepsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/suppliesReView"
+            android:layout_margin="10dp"
+            android:text="Steps"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/stepsReView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/stepsLabel"
+            android:layout_alignParentStart="true" />
+
+        <!--<TextView-->
+            <!--android:id="@+id/task_instructions_body"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="@dimen/text_margin"-->
+            <!--android:text="@string/large_text" />-->
+
+    </RelativeLayout>
 
 
 
