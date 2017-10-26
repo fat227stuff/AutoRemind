@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<task name="oil_change_task">-->
+        <!--<string name="title">"Oil Change"</string>-->
+        <!--<steps>-->
+            <!--<string>"Run the engine until it is warm"</string>-->
+            <!--<string>"Place the oil catch pan directly under the drain plug on the vehicle"</string>-->
+            <!--<string>"Remove the oil drain bolt and wait for the oil to drain (5-10min)"</string>-->
+            <!--<string>"Move the oil catch pan directly under the oil filter"</string>-->
+            <!--<string>"Remove the oil filter using the oil filter wrench and allow to drain"</string>-->
+            <!--<string>"Install new oil filter. Screw it on until it's tight, but not torqued down really hard"</string>-->
+            <!--<string>"Install oil drain plug. Again, screw it on until it's tight, but not torqued down really hard"</string>-->
+            <!--<string>"Pour the new oil into the engine via the "engine oil" filler cap on top of the engine"</string>-->
+            <!--<string>"Take the old oil to your local auto parts store for disposal"</string>-->
+        <!--</steps>-->
+    <!--</task>-->
+    <!--<task name="coolant_flush_task">-->
+        <!--<steps>-->
+            <!--<string>"Park the car with the front end elevated"</string>-->
+            <!--<string>"Place the engine coolant catch pan beneath the radiator"</string>-->
+            <!--<string>"Pull the radiator hose off of the bottom and allow coolant to drain into the pan"</string>-->
+            <!--<string>"Place the coolant catch pan beneath the heater lines"</string>-->
+            <!--<string>"Disconnect the hoses and allow coolant to drain"</string>-->
+            <!--<string>"Using a garden hose, flush out the heater lines in both directions until liquid turns clear"</string>-->
+            <!--<string>"Add new coolant to the heater hoses until coolant runs out the other side"</string>-->
+            <!--<string>"Reconnect all hoses"</string>-->
+            <!--<string>"Fill radiator and coolant reservoir with new coolant"</string>-->
+            <!--<string>"Run the engine with the radiator cap off to allow air to escape (DO NOT DRIVE)"</string>-->
+            <!--<string>"Top off reservoir and Radiator as needed"</string>-->
+        <!--</steps>-->
+    <!--</task>-->
+    <!--<task name="battery_change_task">-->
+        <!--<steps>-->
+            <!--<string>"Turn off all car electronics (lights, ignition, etc)"</string>-->
+            <!--<string>"Use a socket to loosen battery terminal clamps"</string>-->
+            <!--<string>"Remove first the negative (black) then the positive (red) wires"</string>-->
+            <!--<string>"Remove the old battery and insert the new one"</string>-->
+            <!--<string>"Verify that the negative and positive terminals are on the correct side to match with the wires"</string>-->
+            <!--<string>"Reconnect wires and tighten clamps"</string>-->
+        <!--</steps>-->
+    <!--</task>-->
+    <!--<task name="air_filter_change_task">-->
+        <!--<steps>-->
+            <!--<string>"Locate the air box (usually located near the front of the engine)"</string>-->
+            <!--<string>"Unclamp the air box lid and remove it"</string>-->
+            <!--<string>"Remove the old air filter"</string>-->
+            <!--<string>"Remove any debris in the air box (Be careful not to push debris down the engine intake tube)"</string>-->
+            <!--<string>"Insert new air filter"</string>-->
+            <!--<string>"Clamp air box shut"</string>-->
+        <!--</steps>-->
+    <!--</task>-->
+</resources>

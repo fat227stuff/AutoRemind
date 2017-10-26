@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/mikeporet/AndroidStudioProjects/AutoRemind/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="42d711fcb559a8f9f43ebc0d105f69ddcd209c22">
+        <dex dex="/Users/mikeporet/AndroidStudioProjects/AutoRemind/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_475ccaaa0c40f4b114ee0829029970e05f9757c6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/mikeporet/AndroidStudioProjects/AutoRemind/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/Users/mikeporet/AndroidStudioProjects/AutoRemind/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_bd18fa028400e4a8798179364ce2e888d0a3a8ce/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/mikeporet/.android/build-cache/88c1d6a18fdc21856a0804d40f2f98806e320030/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="914f5d3e3ace66080e59613708f06d129a222e25">
+        <dex dex="/Users/mikeporet/AndroidStudioProjects/AutoRemind/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_915b3df338a4d63527ce58d3a1556ed76f70d30f/classes.dex" />
+    </item>
+
+</items>
